@@ -1,6 +1,5 @@
 package com.example.demo.controllers;
 
-import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -18,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.entities.Login;
 import com.example.demo.entities.UserE;
+import com.example.demo.services.EmailService;
 import com.example.demo.services.UserESer;
 
 @RestController
@@ -27,29 +27,36 @@ public class ControllerU {
 
 	@Autowired
 	UserESer uservice;
+	@Autowired
+	private EmailService emailService;
 
-	@PostMapping("/save")
+	
+	@PostMapping("/saveWithMail")
 	public ResponseEntity<?> saveUser(@RequestBody @Valid UserE u) {
-		UserE u1 = uservice.ckUser(u.getEmail());
-		if(u1 !=null) {
-			System.out.println("Already Present!");
-			return new ResponseEntity<>("User Exist!", HttpStatus.OK);
-		}
-		else {
-			if(u.getPassword().equals(u.getCfnpassword())) {
-				System.out.println(u);
-				uservice.saveUserData(u);
-				return new ResponseEntity<>(u.getEmail(), HttpStatus.OK);
-			}
-			else {
-				System.out.println("Enter password correctly");
-				return new ResponseEntity<>("incorrect", HttpStatus.BAD_GATEWAY);
-			}
-		}
-		
+	    UserE u1 = uservice.ckUser(u.getEmail());
+	    if (u1 != null) {
+	        return new ResponseEntity<>("User Exist!", HttpStatus.OK);
+	    } else {
+	        if (u.getPassword().equals(u.getCfnpassword())) {
+	            uservice.saveUserData(u);
+
+	            // ✅ Registration झाल्यावर Mail पाठवा
+	            String subject = "Welcome to E-commerce App 🎉";
+	            String message = "Hello " + u.getUsername() + ",\n\n" +
+	                    "Thank you for registering with us!\n" +
+	                    "Your account has been created successfully.\n\n" +
+	                    "Happy Shopping!\n\n" +
+	                    "Regards,\nTeam E-commerce";
+
+	            emailService.sendEmail(u.getEmail(), subject, message);
+
+	            return new ResponseEntity<>(u.getEmail(), HttpStatus.OK);
+	        } else {
+	            return new ResponseEntity<>("Password mismatch!", HttpStatus.BAD_GATEWAY);
+	        }
+	    }
 	}
-	
-	
+
 	@PostMapping("/login")
 	public ResponseEntity<?> login(@RequestBody Login request, HttpSession session) {
 		UserE user = uservice.get(request.getEmail());
@@ -63,7 +70,6 @@ public class ControllerU {
 			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid Credential ");
 		}
 	}
-	
 	
 	@GetMapping("/logout")
 	public ResponseEntity<String> logout (HttpSession session) {

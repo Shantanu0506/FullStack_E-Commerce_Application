@@ -37,4 +37,9 @@ public class UserEDao implements UserESer {
 		return u;
 	}
 
+	@Override
+	public UserE getById(int userId) {
+		return urepo.findById(userId).orElse(null);
+	}
+
 }

@@ -12,4 +12,6 @@ public interface UserESer {
 
 	UserE get(String email);
 
+	UserE getById(int userId);
+
 }
