@@ -24,7 +24,7 @@ function PrductDetails() {
 
         if (!inCart) {
             try {
-                await axios.post("http://localhost:8080/product/addtocart", null, {
+                await axios.post("${backendUrl}/product/addtocart", null, {
                     params: {
                         uid: user.id,
                         pid: product.id,
@@ -48,7 +48,7 @@ function PrductDetails() {
     };
 
     useEffect(() => {
-        fetch(`http://localhost:8080/product/${pid}`)
+        fetch(`${backendUrl}/product/${pid}`)
             .then((res) => res.json())
             .then((data) => setProduct(data))
             .catch((err) => console.error(err));

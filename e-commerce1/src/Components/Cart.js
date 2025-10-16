@@ -14,7 +14,7 @@ function Cart() {
 
     const fetchCart = () => {
         if (user && user.id) {
-            axios.get(`http://localhost:8080/product/showcart`, {
+            axios.get(`${backendUrl}/product/showcart`, {
                 params: { id: user.id }
             })
                 .then((res) => setCartItems(res.data))
@@ -24,7 +24,7 @@ function Cart() {
 
     const fetchTotal = () => {
         if (user && user.id) {
-            axios.get(`http://localhost:8080/product/showTotal`, {
+            axios.get(`${backendUrl}/product/showTotal`, {
                 params: { id: user.id }
             })
                 .then((res) => setTotal(res.data))
@@ -38,7 +38,7 @@ function Cart() {
     }, []);
 
     const deletec = (cartId) => {
-        axios.delete(`http://localhost:8080/product/cart/delete/${cartId}`)
+        axios.delete(`${backendUrl}/product/cart/delete/${cartId}`)
             .then(() => {
                 alert("Deleted from cart");
                 fetchCart();
@@ -49,7 +49,7 @@ function Cart() {
 
     const updateQuantity = (cartId, newQty) => {
         if (newQty < 1) return;
-        axios.post(`http://localhost:8080/product/addtocart`, null, {
+        axios.post(`${backendUrl}/product/addtocart`, null, {
             params: { uid: user.id, pid: cartId, q: newQty }
         })
             .then(() => {

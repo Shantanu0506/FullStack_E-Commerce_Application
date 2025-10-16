@@ -6,7 +6,7 @@ function Logout(){
     const{logout} =useContext(ThemeContext);
 
     useEffect(() => {
-        axios.get('http://localhost:8080/user/logout');
+        axios.get('${backendUrl}/user/logout');
     },[])
     return(
         <>

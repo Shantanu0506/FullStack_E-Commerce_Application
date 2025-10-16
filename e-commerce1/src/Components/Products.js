@@ -31,49 +31,49 @@ function Products() {
                             <ul className="list-unstyled">
                                 <li
                                     className="menu-item"
-                                    onClick={() => setUrl(`http://localhost:8080/product/all`)}
+                                    onClick={() => setUrl(`${backendUrl}/product/all`)}
                                 >
                                     <i className="bi bi-box-seam me-2"></i> 
                                     <img src={all} alt="home" width="28" height="28" className="me-1" />All Products
                                 </li>
                                 <li
                                     className="menu-item"
-                                    onClick={() => setUrl(`http://localhost:8080/product/search/computers`)}
+                                    onClick={() => setUrl(`${backendUrl}/product/search/computers`)}
                                 >
                                     <i className="bi bi-laptop me-2"></i> 
                                     <img src={computer} alt="home" width="28" height="28" className="me-1" />Computers
                                 </li>
                                 <li
                                     className="menu-item"
-                                    onClick={() => setUrl(`http://localhost:8080/product/search/accessories`)}
+                                    onClick={() => setUrl(`${backendUrl}/product/search/accessories`)}
                                 >
                                     <i className="bi bi-headphones me-2"></i> 
                                     <img src={accessories} alt="home" width="28" height="28" className="me-1" />Accessories
                                 </li>
                                 <li
                                     className="menu-item"
-                                    onClick={() => setUrl(`http://localhost:8080/product/search/footwear`)}
+                                    onClick={() => setUrl(`${backendUrl}/product/search/footwear`)}
                                 >
                                     <i className="bi bi-bag-heart me-2"></i>
                                     <img src={footwear} alt="home" width="28" height="28" className="me-1" /> Footwear
                                 </li>
                                 <li
                                     className="menu-item"
-                                    onClick={() => setUrl(`http://localhost:8080/product/search/clothing`)}
+                                    onClick={() => setUrl(`${backendUrl}/product/search/clothing`)}
                                 >
                                     <i className="bi bi-person-bounding-box me-2"></i> 
                                     <img src={cloths} alt="home" width="28" height="28" className="me-1" />Clothing
                                 </li>
                                 <li
                                     className="menu-item"
-                                    onClick={() => setUrl(`http://localhost:8080/product/search/smart%20home`)}
+                                    onClick={() => setUrl(`${backendUrl}/product/search/smart%20home`)}
                                 >
                                     <i className="bi bi-house-door me-2"></i> 
                                     <img src={smarthome} alt="home" width="28" height="28" className="me-1" />Smart Home
                                 </li>
                                 <li
                                     className="menu-item"
-                                    onClick={() => setUrl(`http://localhost:8080/product/search/electronics`)}
+                                    onClick={() => setUrl(`${backendUrl}/product/search/electronics`)}
                                 >
                                     <i className="bi bi-phone me-2"></i>
                                     <img src={electronics} alt="home" width="28" height="28" className="me-1" /> Electronics
@@ -84,14 +84,14 @@ function Products() {
                             <ul className="list-unstyled">
                                 <li
                                     className="menu-item"
-                                    onClick={() => setUrl(`http://localhost:8080/product/getAllpriceless?price=10000`)}
+                                    onClick={() => setUrl(`${backendUrl}/product/getAllpriceless?price=10000`)}
                                 >
                                     <i className="bi bi-cash-coin me-2"></i>
                                     <img src={lowprice} alt="home" width="28" height="28" className="me-1" /> Under ₹10,000
                                 </li>
                                 <li
                                     className="menu-item"
-                                    onClick={() => setUrl(`http://localhost:8080/product/getAllpricegreat?price=10000`)}
+                                    onClick={() => setUrl(`${backendUrl}/product/getAllpricegreat?price=10000`)}
                                 >
                                     <i className="bi bi-graph-up-arrow me-2"></i>
                                     <img src={highprice} alt="home" width="28" height="28" className="me-1" /> Above ₹10,000

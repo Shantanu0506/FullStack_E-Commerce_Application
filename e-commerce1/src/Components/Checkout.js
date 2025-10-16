@@ -23,7 +23,7 @@ function Checkout() {
   const fetchCart = () => {
     if (user && user.id) {
       axios
-        .get(`http://localhost:8080/product/showcart`, { params: { id: user.id } })
+        .get(`${backendUrl}/product/showcart`, { params: { id: user.id } })
         .then((res) => setCartItems(res.data))
         .catch((err) => console.error("Error fetching cart:", err));
     }
@@ -32,7 +32,7 @@ function Checkout() {
   const fetchTotal = () => {
     if (user && user.id) {
       axios
-        .get(`http://localhost:8080/product/showTotal`, { params: { id: user.id } })
+        .get(`${backendUrl}/product/showTotal`, { params: { id: user.id } })
         .then((res) => setTotal(res.data))
         .catch((err) => console.error("Error fetching total:", err));
     }
@@ -55,7 +55,7 @@ function Checkout() {
         return null;
       }
       const response = await axios.post(
-        `http://localhost:8080/order/create-razorpay-order?amount=${total}`
+        `${backendUrl}/order/create-razorpay-order?amount=${total}`
       );
       return response.data;
     } catch (error) {
@@ -67,7 +67,7 @@ function Checkout() {
   // Clear cart (backend + frontend)
   const clearCart = async () => {
     try {
-      await axios.post(`http://localhost:8080/order/clear-cart`, { params: { userId: user.id } });
+      await axios.post(`${backendUrl}/order/clear-cart`, { params: { userId: user.id } });
       setCartItems([]);
       localStorage.removeItem("cart");
     } catch (err) {
@@ -91,7 +91,7 @@ function Checkout() {
         console.log("Payment success:", response);
 
         // verify payment on backend
-        await axios.post(`http://localhost:8080/order/verify-razorpay`, {
+        await axios.post(`${backendUrl}/order/verify-razorpay`, {
           orderId: response.razorpay_order_id,
           paymentId: response.razorpay_payment_id,
           signature: response.razorpay_signature,
@@ -101,7 +101,7 @@ function Checkout() {
         });
 
             // ✅ Clear cart after successful payment
-        await axios.post(`http://localhost:8080/order/clear-cart`, null, {
+        await axios.post(`${backendUrl}/order/clear-cart`, null, {
             params: { userId: user.id }
         });
 

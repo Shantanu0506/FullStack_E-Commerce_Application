@@ -1,11 +1,13 @@
 import { createContext, useEffect, useState } from "react";
 import axios from "axios";
+export const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || 'https://fullstack-e-commerce-application-l5hr.onrender.com';
+
 
 export const ThemeContext = createContext();
 
 function ThemeProvider(props) {
     const [profile, setProfile] = useState([]);
-    const [url, setUrl] = useState(`http://localhost:8080/product/all`);
+    const [url, setUrl] = useState(`${BACKEND_URL}/product/all`);
     const [user, setUser] = useState(null);
     const [cartItems, setCartItems] = useState([]);
 
@@ -45,7 +47,7 @@ function ThemeProvider(props) {
     // 👈 Backend मधून cart load करण्यासाठी (optional)
     const loadCartFromBackend = async (userId) => {
         try {
-            const response = await axios.get(`http://localhost:8080/product/showcart?id=${userId}`);
+            const response = await axios.get(`${BACKEND_URL}/product/showcart?id=${userId}`);
             const backendCartItems = response.data.map(item => ({
                 id: item.product.id,
                 title: item.product.title,
@@ -61,7 +63,7 @@ function ThemeProvider(props) {
 
     // search method
     const searchTitle = (proTitle) => {
-        axios.get(`http://localhost:8080/product/search?title=${proTitle}`)
+        axios.get(`${BACKEND_URL}/product/search?title=${proTitle}`)
             .then(response => setProfile(response.data))
             .catch(err => console.error(err));
     };

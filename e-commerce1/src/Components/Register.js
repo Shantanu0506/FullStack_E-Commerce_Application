@@ -16,7 +16,7 @@ function Register() {
   const onSubmitHandler = async (event) => {
     event.preventDefault();
     try {
-      const res = await axios.post(`http://localhost:8080/user/saveWithMail`, formData);
+      const res = await axios.post(`${backendUrl}/user/saveWithMail`, formData);
 
       if (res.status === 200) {
         setMessage("🎉 Registration successful! Redirecting to login...");

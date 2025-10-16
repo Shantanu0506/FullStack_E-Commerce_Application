@@ -34,7 +34,7 @@ function Login() {
                 navigate("/admin");
             } else {
                 // normal user login
-                const res = await axios.post("http://localhost:8080/user/login", user, {
+                const res = await axios.post("${backendUrl}/user/login", user, {
                     withCredentials: true
                 });
 
